@@ -14,7 +14,7 @@ body{
 }
 
 #container{
-
+  /* height: 70vh; */
     text-align: center;
     box-shadow: black;
     background-color: rgba(41, 89, 83, 0.858);
@@ -25,7 +25,7 @@ body{
 }
 
 form{
-    padding: 20px;
+  padding: 20px;
 }
 
 #container:hover {
