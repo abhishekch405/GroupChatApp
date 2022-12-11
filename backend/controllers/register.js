@@ -1,6 +1,6 @@
 const Users=require('../models/users');
 const bcrypt=require('bcryptjs');
-
+const jwt =require('jsonwebtoken');
 
 exports.register= async (req,res,next)=>{
     const {name,email,phone,password}=req.body;
@@ -20,3 +20,28 @@ exports.register= async (req,res,next)=>{
         res.json({success:false,message:"Some Error Occured",error:error});
     }
 };
+
+
+exports.login = async (req,res,next)=>{
+    const {email, password}=req.body;
+    try {
+        const user=await  Users.findOne({where:{email:email}}); 
+        if(!user){
+            return res.status(404).json({success:false,message:'User does not exist!'});
+        }
+        const passwordCheck=await bcrypt.compare(password,user.password);
+
+        if(!passwordCheck){
+            return res.status(400).json({success:false,message:' Password does not match !'})
+        }
+
+        const token=jwt.sign({id:user.id},`${process.env.TOKEN_SECRET}`);
+        console.log("token",token);
+        return res.status(200).json({token:token,success:true,message:'Successfully logged in!'})
+        
+    }
+    catch (error) {
+        return res.json(error);
+        console.log(error);
+    }   
+}

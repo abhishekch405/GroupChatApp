@@ -19,8 +19,7 @@ async function login(e){
             try {
                 res=await axios.post(url,object);
                 console.log("response of post ",res.data);
-                // const hasPremium=res.data.hasPremium;
-                // localStorage.setItem('token',res.data.token);
+                localStorage.setItem('token',res.data.token);
 
                 const notif=document.getElementById('signup-notification');
 
@@ -36,7 +35,7 @@ async function login(e){
                     // else{
                     //     window.location.href="../premiumFrontEnd/premium.html";
                     // }
-                },0)
+                },1000)
             } catch (err) {
                 alert(err.response.data.message);
             }
@@ -44,7 +43,6 @@ async function login(e){
          else{
                 alert("Please fill all the fields");
             }
-
 }
 
 
