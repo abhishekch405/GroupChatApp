@@ -32,11 +32,10 @@ exports.login = async (req,res,next)=>{
         const passwordCheck=await bcrypt.compare(password,user.password);
 
         if(!passwordCheck){
-            return res.status(400).json({success:false,message:' Password does not match !'})
+            return res.status(401).json({success:false,message:' Password does not match !'})
         }
 
         const token=jwt.sign({id:user.id},`${process.env.TOKEN_SECRET}`);
-        console.log("token",token);
         return res.status(200).json({token:token,success:true,message:'Successfully logged in!'})
         
     }

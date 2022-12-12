@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: cyan;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#main-heading{
+    padding: 0px;
+    margin:0;
+    background-color: rgb(29, 178, 204);
+    text-align: center;
+    align-items: center;
+    height: 8vh;
+    
+}
+#members{
+    
+    background-color: rgb(25, 126, 126);
+    float:left;
+    width:30%;
+    min-height: 92vh;
+    position: relative;
+}
+
+#members #create-group{
+    position: absolute;
+    top:0px;
+    right:0px;
+    background-color: rgb(23, 77, 77);
+    color: white;
+    padding: 4px;
+    border: 1px solid grey;
+    cursor: pointer;
+}
+#members #create-group:hover{
+    box-shadow: 0 8px 16px 0 grey;
+}
+
+#container{
+  
+    background-color:  rgb(47, 196, 196);
+    float:right;
+    width:70%;
+    min-height: 92vh;
+    position: relative;
+}
+
+#container button{
+    position: absolute;
+    bottom:0;
+    right: 5px;
+    padding: 5px;
+}
+#container input[type=text]{
+    position: absolute;
+    bottom:0;
+    left: 5px;
+    padding: 5px;
+}

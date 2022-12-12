@@ -7,6 +7,7 @@ const cors= require('cors');
 
 
 const loginRoutes=require('./routes/register');
+const memberRoutes=require('./routes/member');
 const sequelize=require('./util/database');
 
 const Users=require('./models/users');
@@ -17,7 +18,7 @@ app.use(cors({
     origin:"*"
 }));
 app.use(loginRoutes);
-
+app.use(memberRoutes);
 
 //{force:true}
 

@@ -28,7 +28,7 @@ async function login(e){
                 setTimeout(()=>{
                     notif.classList.remove("active"); 
                     console.log("Notif removed");
-                    // window.location.href=
+                     window.location.href="../main/chat.html"
                     // if(hasPremium==='0'){
                     // window.location.href='../mainFrontEnd/index.html';
                     // }
