@@ -1,4 +1,11 @@
-window.addEventListener('DOMContentLoaded',getUsers);
+window.addEventListener('DOMContentLoaded',screenready);
+
+function screenready(){
+    getUsers();
+    const chatSection=document.getElementsByClassName('chat__section')[0];
+    const form=document.getElementById("send__message__form");
+    form.addEventListener('submit',sendMessage);
+}
 
 async function getUsers(){
     const url='http://localhost:3000/users';
@@ -8,18 +15,42 @@ async function getUsers(){
     } catch (error) {
         console.log(error);
     }
+
     
+
 }
 
 function showUsers(users){
-    const container=document.getElementById('members');
-    const ul=document.createElement('ul');
+    let singlecontacts=document.getElementById('single__contacts');
+    singlecontacts.innerHTML='';
     if (users.length>0){
         users.forEach(user=>{
-            const li=document.createElement('li');
-            li.innerHTML=`<h1>${user.name}</h1>`;
-            ul.appendChild(li);
+            let newDiv=`<div class="single__contact" id=${user.id}>
+            <h5>${user.name}</h5>
+        </div>`
+            singlecontacts.innerHTML+=newDiv;
         })
-        container.appendChild(ul);
+    }
+}
+
+// const chatSection=document.getElementsByClassName('chat__section')[0];
+
+
+// const form=document.getElementById("send__message__form");
+
+// form.addEventListener('submit',sendMessage);
+
+async function sendMessage(e){
+    e.preventDefault();
+
+    const messagedata={
+        message_text:document.getElementById('msgtext').value
+    }
+    console.log(messagedata);
+    const url='http://localhost:3000/sendmessage';
+    try {
+        const response=await axios.post(url,messagedata,{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
+    } catch (error) {
+        console.log(error);
     }
 }

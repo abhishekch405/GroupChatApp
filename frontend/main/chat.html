@@ -12,22 +12,69 @@
     <div id="main-heading">
         <h1> Chat App</h1>
     </div>
-    <div id="members">
-        
-        <button id="create-group">Create New Group</button>
-        <!-- <h1> User 1</h1>
-        <h1>User 2 </h1>
-        <h1>User 3</h1>
-        <h1>User 4</h1>
-        <h1>User 5</h1>
-        <h1>User 6</h1>
-        <h1>User 6</h1> -->
+    <div class="chat_and_contacts">
+        <div class="contacts">
+            <div class="single__contacts" id="single__contacts">
+                <h4>Single Contacts</h4>
+                <div class="single__contact">
+                    <h5>One</h5>
+                </div>
+                <div class="single__contact">
+                    <h5>Two</h5>
+                </div>
+                <div class="single__contact">
+                    <h5>Three</h5>
+                </div>
+            </div>
+            <div class="groups">
+                <h4>Groups</h4>
+                <div class="single__group">
+                    <h5>flat</h5>
+                </div>
+                <div class="single__group">
+                    <h5>family</h5>
+                </div>
+                <div class="single__group">
+                    <h5>group 3</h5>
+                </div>
+                <div class="single__group">
+                    <h5>group 4</h5>
+                </div>
+
+
+            </div>
+            <div class="createNewGroup">
+                <form action="" method="post" id="form__newGroup">
+                    <input type="text" placeholder="Enter Group Name" id="newGroup__input">
+                    <input type="submit" value="Add New Group">
+                </form>
+            </div>
+
+        </div>
+        <div class="chat__section">
+            <div class="display__chat">
+                <h4 id="person__name">Demo Name</h4>
+                <div class="actual__chat">
+                    <div class="my__message msgs">
+                        <h4> this message is from alok</h4>
+                        <p>timestamp</p>
+                    </div>
+                    <div class="others__message msgs">
+                        <h4> this message is from Others</h4>
+                        <p>timestamp</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="send__message">
+              <form action="http://127.0.0.1:5500/frontend/chat_interface/chat.html" method="post" id="send__message__form">
+                <input type="text" id="msgtext" placeholder="Write Your Mesaage">
+                <button type="submit">➤</button>
+              </form>
+            </div>
+        </div>
     </div>
 
-    <div id="container">
-      <input type="text" placeholder="Write your message...">
-      <button> Send</button>  
-    </div>
     <script src="chat.js"></script>
 </body>
 </html>
