@@ -2,21 +2,18 @@ const Sequelize=require('sequelize');
 
 const sequelize=require('../util/database');
 
-const Groups= sequelize.define('groups',{
+const Groupmembers= sequelize.define('groupmembers',{
     id:{
         type: Sequelize.INTEGER,
         allowNull:false,
         autoIncrement:true,
         primaryKey:true
     },
-    groupname:{
-        type: Sequelize.STRING,
+    isadmin:{
+        type:Sequelize.BOOLEAN,
         allowNull:false,
-    },
-    createdby:{
-        type: Sequelize.INTEGER,
-        allowNull:false
+        default:false
     }
 })
 
-module.exports=Groups;
+module.exports=Groupmembers;

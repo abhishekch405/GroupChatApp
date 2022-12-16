@@ -5,6 +5,9 @@ function screenready(){
     const chatSection=document.getElementsByClassName('chat__section')[0];
     const form=document.getElementById("send__message__form");
     form.addEventListener('submit',sendMessage);
+
+    const newgroupform=document.getElementById("form__newGroup");
+    newgroupform.addEventListener('submit',createnewgroup);
 }
 
 async function getUsers(){
@@ -15,9 +18,6 @@ async function getUsers(){
     } catch (error) {
         console.log(error);
     }
-
-    
-
 }
 
 function showUsers(users){
@@ -33,12 +33,6 @@ function showUsers(users){
     }
 }
 
-// const chatSection=document.getElementsByClassName('chat__section')[0];
-
-
-// const form=document.getElementById("send__message__form");
-
-// form.addEventListener('submit',sendMessage);
 
 async function sendMessage(e){
     e.preventDefault();
@@ -50,6 +44,22 @@ async function sendMessage(e){
     const url='http://localhost:3000/sendmessage';
     try {
         const response=await axios.post(url,messagedata,{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+async function createnewgroup(e){
+    e.preventDefault();
+
+    const newgroupdata={
+        groupname:document.getElementById('newGroup__input').value
+    }
+    console.log(newgroupdata);
+    const url='http://localhost:3000/newgroup';
+    try {
+        const response=await axios.post(url,newgroupdata,{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
     } catch (error) {
         console.log(error);
     }
