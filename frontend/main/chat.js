@@ -104,13 +104,13 @@ function showAllgroups(groups){
                                   <button type="submit">➤</button>
                                 </form>
                               </div>`
-        //getgroupmessages(groupid);
+        getgroupmessages(groupid);
         
         const messageform=document.getElementById('send__message__form');
         messageform.addEventListener('submit',sendMessage);
         
-         const display__chat=document.getElementById('display__chat');
-         display__chat.addEventListener('click',showGroupInformation);
+        const display__chat=document.getElementById('display__chat');
+        display__chat.addEventListener('click',showGroupInformation);
     })
 }
 
@@ -180,4 +180,35 @@ function showGroupInformation(e){
     }
 
 
+}
+
+async function getgroupmessages(groupid){
+    let response;
+    const url=`http://localhost:3000/allmessages/${groupid}`;
+    try {
+      response=await axios.get(url,{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
+    } catch (error) {
+        shownotification(error);
+    }
+    shownotification(response.data.message);
+    const senderid=response.data.userId;
+    const Messages=response.data.messages;
+    let actual__chat=document.getElementsByClassName("actual__chat")[0];
+    Messages.forEach(message=>{
+        if(message.userId!=senderid){
+            let receiversmessage =`<div class="others__message msgs">
+                                    <h5>${message.sendername}</h5>
+                                    <h4>${message.message}</h4>
+                                    <p>${message.createdAt}</p>
+                                   </div>`
+            actual__chat.innerHTML+=receiversmessage;
+        }
+        else{
+            let sendersmessage =`<div class="my__message msgs">
+                                    <h4>${message.message}</h4>
+                                    <p>${message.createdAt}</p>
+                                   </div>`
+            actual__chat.innerHTML+=sendersmessage;
+        }
+    })
 }

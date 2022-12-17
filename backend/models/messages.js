@@ -10,6 +10,10 @@ const Messages= sequelize.define('messages',{
         primaryKey:true
     },
     message: Sequelize.STRING,
+    sendername:{
+        type:Sequelize.STRING,
+        allowNull:false
+    },
     receiverid:{
         type: Sequelize.INTEGER,
         allowNull:false,
