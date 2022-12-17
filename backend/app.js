@@ -28,7 +28,7 @@ app.use(groupRoutes);
 app.use(messageRoutes);
 
 
-//Many to one between users and messages
+// Many to one between users and messages
 Users.hasMany(Messages);
 Messages.belongsTo(Users);
 
@@ -39,8 +39,8 @@ Groups.belongsToMany(Users,{through:Groupmembers});
 
 //Many to one between Groups and Messages
 
-Groups.hasMany(Messages);
-Messages.belongsTo(Groups);
+//  Groups.hasMany(Messages);
+//  Messages.belongsTo(Groups);
 
 //{force:true}
 sequelize

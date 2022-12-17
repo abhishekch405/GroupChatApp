@@ -3,12 +3,15 @@ const Messages=require('../models/messages');
 
 exports.sendMessage= async (req,res,next)=>{
     const text_message=req.body.message_text;
-
-
+    const receiverid=req.body.receiverid;
+    
     try {
-        await req.user.createMessage({message:text_message,receiverid:12345, isgroupmessage:false})
-        res.status(200).json({success:false})
+        //const sendtogroup=await req.user.findGroup({where:{id:groupid}});
+        //console.log('this is the group',sendtogroup );
+        await req.user.createMessage({message:text_message,receiverid:receiverid, isgroupmessage:true})
+        return res.status(200).json({success:true,message:"Message Sent successfull"});
     } catch (error) {
+        console.log(error);
         res.json(error);
     }
     // const {name,email,phone,password}=req.body;

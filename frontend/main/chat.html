@@ -26,19 +26,13 @@
                     <h5>Three</h5>
                 </div>
             </div>
-            <div class="groups">
+            <div class="groups" id="groups">
                 <h4>Groups</h4>
                 <div class="single__group">
                     <h5>flat</h5>
                 </div>
                 <div class="single__group">
                     <h5>family</h5>
-                </div>
-                <div class="single__group">
-                    <h5>group 3</h5>
-                </div>
-                <div class="single__group">
-                    <h5>group 4</h5>
                 </div>
 
 
@@ -51,8 +45,8 @@
             </div>
 
         </div>
-        <div class="chat__section">
-            <div class="display__chat">
+        <div class="chat__section" >
+            <div class="display__chat" id="display__chat">
                 <h4 id="person__name">Demo Name</h4>
                 <div class="actual__chat">
                     <div class="my__message msgs">
@@ -67,14 +61,16 @@
                 </div>
             </div>
             <div class="send__message">
-              <form action="http://127.0.0.1:5500/frontend/chat_interface/chat.html" method="post" id="send__message__form">
-                <input type="text" id="msgtext" placeholder="Write Your Mesaage">
+              <form action="" method="post" id="send__message__form">
+                <input type="text" id="msgText" placeholder="Write Your Mesaage">
                 <button type="submit">➤</button>
               </form>
             </div>
         </div>
     </div>
-
+    <div id="notification-container">
+        
+    </div>
     <script src="chat.js"></script>
 </body>
 </html>

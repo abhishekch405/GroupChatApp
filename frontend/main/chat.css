@@ -1,36 +1,59 @@
-.chat_and_contacts{
+.logo__container{
+    height: 3rem;
     width: 80vw;
     margin: auto;
+    margin-top: 0.5rem;
+    background:linear-gradient(rgb(214, 28, 28), rgb(86, 205, 189), rgb(40, 149, 40));;
+    border:1px solid royalblue;
+    border-radius: 12px;
+}
+.logo__container img{
+    border-radius: 50%;
+    width: 3rem;
+    margin-left: 47%;
+    opacity: 70%;
+}
+.chat_and_contacts{
+    min-width:650px;
+    max-width: 1120px;
+    margin: auto;
     margin-top: 0.3rem;
-    min-height: 80vh;
+    min-height: 590px;
     max-height: 90vh;
     border-radius: 5px;
     display: flex;
     border: 2px solid lightcoral;
 }
-
 .contacts{
-    width: 33%;
+    width: 380px;
     padding: 1rem;
     border: 1px solid lightgray;
     margin: 0.1rem;
     border-radius: 3px;
     background: green;
-
 }
-
 .chat__section{
-    width: 63%;
+    width: 760px;
     margin: 0.1rem;
     border: 1px solid lightgrey;
     padding: 0.4rem;
 }
-
 #person__name{
     background: black;
     color: white;
     text-align: center;
-    padding: 0.3rem;
+    /* padding: 0.3rem; */
+    padding: 0.5rem;
+    width: 92%;
+}
+
+.group__name{
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    width: 92%;
+
 }
 
 .single__contacts{
@@ -41,9 +64,9 @@
     border-radius: 10px;
     overflow: scroll;
     scroll-behavior: smooth;
-    max-height: 50%;
+    max-height:280px;
+    min-height:270px  ;
 }
-
 .single__contact{
     width: 100%;
     height: 2em;
@@ -53,18 +76,15 @@
     display: flex;
     align-items: center;
 }
-
 .single__contact:hover{
     background-color: aqua;
 }
-
 .single__contact h5{
     margin-left: 1.5rem;
     font-weight: bolder;
     font-style: italic;
     font-size: medium;
 }
-
 .groups{
     margin-top: 1rem;
     display: flex;
@@ -72,8 +92,10 @@
     border: 1px solid black;
     padding: 0.2rem;
     border-radius: 10px;
+    max-height:270px;
+    min-height:260px;
+    overflow: scroll;
 }
-
 .single__group{
     width: 100%;
     height: 2em;
@@ -82,21 +104,28 @@
     background-color: rgb(193, 41, 190);
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
-
+.joingroup__Btn{
+    margin-right: 5%;
+    padding: 0.25rem;
+    border-radius: 5px;
+    border: none;
+}
+.joingroup__Btn:hover{
+    background-color: rebeccapurple;
+    color: white;
+    font-weight: bolder;
+}
 .single__group h5{
     margin-left: 1.5rem;
     font-weight: bolder;
     font-style: italic;
     font-size: medium;
 }
-
 .single__group:hover{
     background-color: aqua;
 }
-
-
-
 .actual__chat{
     width: 100%;
     padding: 0.1rem;
@@ -104,7 +133,6 @@
     max-height: 490px;
     min-height:480px ;
 }
-
 .msgs{
     min-width: 40%;
     width: fit-content;
@@ -113,29 +141,24 @@
     margin: 0.1rem 0 0.1rem 0;
     float: right;
     position: relative;
-
+    
 }
-
 .msgs p{
     font-size: x-small;
     position: absolute;
     right: 5px;
     bottom: 2px;
 }
-
 .my__message{
     background-color: aqua;
     float: right;
     clear: both;
 }
-
-
 .others__message{
     background-color: chartreuse;
     float: left;
     clear: both;
 } 
-
 .send__message{
     background-color: aqua;
     width: 100%;
@@ -143,12 +166,10 @@
     display: flex;
     align-items: center;
 }
-
 #send__message__form{
     display: flex;
-
+    
 }
-
 #send__message__form input{
     min-width: 37vw;
     max-width: 40vw;
@@ -165,9 +186,8 @@
 }
 #send__message__form button:hover{
     background: green;
-
+    
 }
-/* new for group */
 #form__newGroup{
     background-color: black;
     margin-top: .5rem;
@@ -190,9 +210,59 @@
 #form__newGroup input[type=submit]:hover{
     background-color: rgb(36, 150, 61);
 }
-
 .message_sender_name{
     color: coral;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: bolder;
 }
+
+#groupDetail__section{
+    display:flex;
+    background: lightgray;
+    width:670px;
+
+}
+
+.groupMembers{
+    width: 90%;
+
+}
+.groupMember{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid green;
+    background-color: lightgreen;
+}
+
+.add_new_member{
+    padding: 1rem;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 8px;
+
+}
+
+.add_new_member input[type=submit]{
+    padding: 0.5rem;
+
+
+
+}
+
+.add_new_member input[type=submit]:hover{
+    background-color: rebeccapurple;
+    color: white;
+}
+
+#notification-container{
+    float:right;
+    position: absolute;
+    top:0px;
+    right:0px;    
+}
+
+.notification{
+    background-color: aqua;
+    color:rebeccapurple;
+}
+
