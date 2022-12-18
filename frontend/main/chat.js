@@ -185,11 +185,17 @@ function showGroupInformation(e){
 
  function getgroupmessages(groupid){
     let response;
-    const url=`http://localhost:3000/allmessages/${groupid}`;
+    const oldMessagesinLS=JSON.parse(localStorage.getItem(`${groupid}`) || "[]");
+    const lastMessageId= oldMessagesinLS.length===0?0: oldMessagesinLS[oldMessagesinLS.length-1].id;
+    const url=`http://localhost:3000/allmessages/${groupid}?lastMessageId=${lastMessageId}`;
     setInterval(async ()=>{
         try {
             response=await axios.get(url,{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
-            displayingChat(response);       
+           
+           const newMessages=response.data.messages;
+           const allMessages=[...oldMessagesinLS,...newMessages];
+           localStorage.setItem(`${groupid}`,JSON.stringify(allMessages));
+            displayingChat(response,allMessages); 
         } catch (error) {
             console.log(error);
         }
@@ -202,10 +208,10 @@ function showGroupInformation(e){
     //     shownotification(error);
     // }
 
-    function displayingChat(response){
+    function displayingChat(response,Messages){
         //shownotification(response.data.message);
         const senderid=response.data.userId;
-        const Messages=response.data.messages;
+        //const Messages=response.data.messages;
         let actual__chat=document.getElementsByClassName("actual__chat")[0];
         actual__chat.innerHTML="";
         Messages.forEach(message=>{
