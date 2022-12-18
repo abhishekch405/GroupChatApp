@@ -70,3 +70,58 @@ exports.addNewMember= async (req,res,next)=>{
     console.log("fetched Group", maingroup);
     
 }
+
+exports.makeAdmin = async (req,res,next)=>{
+    
+    const {targetId,groupId}=req.body;
+    const userId=req.user.id;
+    try {
+        const ifadmin=Groupmembers.findOne({where:{userId:userId,groupId:groupId,isadmin:true}});
+        if(!ifadmin){
+            return res.status(200).json({success:false,message:"You don't have admin powers for the group"});
+        }
+        await Groupmembers.update({isadmin:true},{where:{userId:targetId,groupId:groupId}});
+        return res.status(200).json({success:true,message:'Successfully made another admin'});
+    } catch (error) {
+        res.json({message:"Something Went Wrong",error});
+    }
+}
+exports.removeAdmin =async (req,res,next)=>{
+    
+    const {targetId,groupId}=req.body;
+    const userId=req.user.id;
+    try {
+        const ifadmin=Groupmembers.findOne({where:{userId:userId,groupId:groupId,isadmin:true}});
+        if(!ifadmin){
+            return res.status(200).json({success:false,message:"You don't have admin powers for the group"});
+        }
+        await Groupmembers.update({isadmin:false},{where:{userId:targetId,groupId:groupId,isadmin:true}});
+        return res.status(200).json({success:true,message:'Successfully removed admin'});
+    } catch (error) {
+        res.json({message:"Something Went Wrong",error});
+    }
+}
+exports.removeUserFromGroup =async (req,res,next)=>{
+    const {targetId,groupId}=req.body;
+    const userId=req.user.id;
+    try {
+        const ifadmin=Groupmembers.findOne({where:{userId:userId,groupId:groupId,isadmin:true}});
+        if(!ifadmin){
+            return res.status(200).json({success:false,message:"You don't have admin powers for the group"});
+        }
+        await Groupmembers.destroy({where:{userId:targetId,groupId:groupId}});
+        return res.status(200).json({success:true,message:'Removed an user from the group'});
+    } catch (error) {
+        res.json({message:"Something Went Wrong",error});
+    }
+}
+exports.leaveGroup =async (req,res,next)=>{
+    const groupId=req.body.groupId;
+    const userId=req.user.id;
+    try {
+        await Groupmembers.destroy({where:{userId:userId,groupId:groupId}});
+        return res.status(200).json({success:true,message:'You have successfully left the group'});
+    } catch (error) {
+        res.json({message:"Something Went Wrong",error});
+    }
+}

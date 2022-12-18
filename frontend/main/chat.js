@@ -172,6 +172,8 @@ function showGroupInformation(e){
             })
             .catch(err=>console.log(err));
         //
+
+
         const addmemberform=document.getElementById("add_new_memberForm");
         addmemberform.addEventListener('submit',async (e)=>{
             e.preventDefault();
@@ -193,6 +195,45 @@ function showGroupInformation(e){
                 console.log(error);
             }
             console.log("submit is working");
+        })
+
+        const groupDetailBtns=document.getElementById("groupDetail__section");
+        groupDetailBtns.addEventListener('click',async (e)=>{
+            console.log(e.target.className);
+
+            if(e.target.classList.contains("adminBtn") && e.target.classList.contains("false") ){
+                try {
+                    const response=await axios.post("http://localhost:3000/makeadmin",{targetId:e.target.id,groupId:groupid},{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
+                    shownotification(response.data.message);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            if(e.target.classList.contains("adminBtn") && e.target.classList.contains("true") ){
+                try {
+                    const response=await axios.post("http://localhost:3000/removeadmin",{targetId:e.target.id,groupId:groupid},{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
+                    shownotification(response.data.message);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            if(e.target.classList.contains("removeUser")){
+                try {
+                    const response=await axios.post("http://localhost:3000/removeuser",{targetId:e.target.id,groupId:groupid},{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
+                    shownotification(response.data.message);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            if(e.target.classList.contains("leave__group")){
+                try {
+                    const response=await axios.post("http://localhost:3000/leavegroup",{groupId:groupid},{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
+                    shownotification(response.data.message);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
         })
     }
 
@@ -216,7 +257,7 @@ function showGroupInformation(e){
             console.log(error);
         }
        
-    },1000000);
+    },5000);
 
     // try {
     //   response=await axios.get(url,{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});

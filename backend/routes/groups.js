@@ -8,4 +8,10 @@ router.get('/getallgroups',userauthorization.authorization,groupController.getal
 
 router.post('/addmember',userauthorization.authorization,groupController.addNewMember);
 router.get('/getmembers/:groupid',userauthorization.authorization,groupController.getMembers);
+
+router.post('/makeadmin',userauthorization.authorization,groupController.makeAdmin);
+router.post('/removeadmin',userauthorization.authorization,groupController.removeAdmin);
+router.post('/removeuser',userauthorization.authorization,groupController.removeUserFromGroup);
+router.post('/leavegroup',userauthorization.authorization,groupController.leaveGroup);
+
 module.exports=router;
