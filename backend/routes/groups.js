@@ -7,5 +7,5 @@ router.post('/newgroup',userauthorization.authorization,groupController.createNe
 router.get('/getallgroups',userauthorization.authorization,groupController.getallgroups);
 
 router.post('/addmember',userauthorization.authorization,groupController.addNewMember);
-
+router.get('/getmembers/:groupid',userauthorization.authorization,groupController.getMembers);
 module.exports=router;

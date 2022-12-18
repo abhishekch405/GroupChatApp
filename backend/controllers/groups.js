@@ -37,6 +37,15 @@ exports.getallgroups=async (req,res,next)=>{
     }
 }
 
+exports.getMembers=async(req,res,next)=>{
+    const groupid=req.params.groupid;
+    try {
+        const groupMembers=await Groupmembers.findAll({where:{groupID:groupid}});
+        return res.status(200).json({success:false,groupMembers:groupMembers,message:"Group Members found successfully"})
+    } catch (error) {
+        res.json(error);
+    }
+}
 exports.addNewMember= async (req,res,next)=>{
     const {email,groupID}=req.body;
     const adminuser=req.user.id;

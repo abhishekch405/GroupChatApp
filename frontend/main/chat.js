@@ -154,8 +154,24 @@ function showGroupInformation(e){
                         
                         </div>`;
         displaychatarea.innerHTML+=detailsarea;
-
-
+        
+        //Showing members to the group
+        const URL=`http://localhost:3000/getmembers/${groupid}`;
+        axios.get(URL,{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}})
+            .then(response=>{
+                const Members=response.data.groupMembers;
+                Members.forEach(member=>{
+                    let groupMembers=document.getElementsByClassName('groupMembers')[0];
+                    let newMember=`<div class="groupMember">
+                                        <h5> User Id:${member.userId}</h5>
+                                        <button class="adminBtn  ${member.isadmin}" id="${member.userId}">${member.isadmin? "Admin":"Make Admin"} </button>
+                                        <button class="removeUser" id="${member.userId}" > Remove User</button>
+                                    </div>`;
+                    groupMembers.innerHTML+=newMember;
+                })
+            })
+            .catch(err=>console.log(err));
+        //
         const addmemberform=document.getElementById("add_new_memberForm");
         addmemberform.addEventListener('submit',async (e)=>{
             e.preventDefault();
@@ -200,7 +216,7 @@ function showGroupInformation(e){
             console.log(error);
         }
        
-    },1000);
+    },1000000);
 
     // try {
     //   response=await axios.get(url,{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
