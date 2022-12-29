@@ -9,6 +9,7 @@ function shownotification(message){
     },3000);
 }
 
+//For showing users on the screen!
 
 async function getUsers(){
     const url='http://localhost:3000/users';
@@ -122,7 +123,7 @@ async function sendMessage(e){
         message_text:document.getElementsByClassName('msgText')[0].value,
         receiverid:document.getElementsByClassName('msgText')[0].id
     }
-    document.getElementsByClassName('msgText')[0].id='';
+    //document.getElementsByClassName('msgText')[0].id='';
     document.getElementsByClassName('msgText')[0].value='';
     console.log(messagedata);
     const url='http://localhost:3000/sendmessage';
@@ -140,6 +141,10 @@ function showGroupInformation(e){
         const groupid=e.target.id;
         document.getElementsByClassName('actual__chat')[0].style.display='none';
         let displaychatarea=e.target.parentElement;
+        let area=document.getElementById('groupDetail__section');
+        if(area){
+            area.innerHTML='';
+        }
         let detailsarea=`<div id="groupDetail__section">
                             <div class="groupMembers">
                                 <h4>Members of the Group</h4>
@@ -257,7 +262,7 @@ function showGroupInformation(e){
             console.log(error);
         }
        
-    },5000);
+    },1000);
 
     // try {
     //   response=await axios.get(url,{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
