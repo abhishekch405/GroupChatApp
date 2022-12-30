@@ -1,15 +1,19 @@
 const dotenv=require('dotenv')
 dotenv.config();
+
 const express = require("express");
-const app=express();
 const bodyParser=require('body-parser');
 const cors= require('cors');
-
+const multer = require('multer');
+const fileUpload = require('express-fileupload');
 
 const loginRoutes=require('./routes/register');
 const memberRoutes=require('./routes/member');
 const messageRoutes=require('./routes/messages');
 const groupRoutes=require('./routes/groups');
+
+
+
 const sequelize=require('./util/database');
 
 const Users=require('./models/users');
@@ -17,8 +21,13 @@ const Messages=require('./models/messages');
 const Groups=require('./models/groups');
 const Groupmembers=require('./models/groupmembers');
 
+const app=express();
+const upload=multer();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
+app.use(fileUpload());
+
 app.use(cors({
     origin:"*"
 }));

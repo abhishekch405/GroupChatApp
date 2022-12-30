@@ -9,6 +9,8 @@ function shownotification(message){
     },3000);
 }
 
+
+
 //For showing users on the screen!
 
 async function getUsers(){
@@ -102,6 +104,7 @@ function showAllgroups(groups){
                                 <div class="send__message">
                                 <form action="" method="post" id="send__message__form">
                                   <input type="text" id=${groupid} class="msgText" placeholder="Write Your Mesaage">
+                                  <input type="file" id=${groupid} class="msgFile">
                                   <button type="submit">➤</button>
                                 </form>
                               </div>`
@@ -118,21 +121,41 @@ function showAllgroups(groups){
 
 async function sendMessage(e){
     e.preventDefault();
-    console.log(document.getElementsByClassName('msgText')[0]);
+    const file=document.getElementsByClassName("msgFile")[0].files[0];
+
     const messagedata={
         message_text:document.getElementsByClassName('msgText')[0].value,
         receiverid:document.getElementsByClassName('msgText')[0].id
     }
     //document.getElementsByClassName('msgText')[0].id='';
+    if(messagedata.message_text.length>0){
     document.getElementsByClassName('msgText')[0].value='';
     console.log(messagedata);
     const url='http://localhost:3000/sendmessage';
     try {
         const response=await axios.post(url,messagedata,{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
         console.log(response.data.message);
-        shownotification(response.data.message);
+        //shownotification(response.data.message);
     } catch (error) {
         console.log(error);
+    }
+    }
+    else if(!file){
+        alert('It can not be empty')
+    }
+    else{
+        try {
+            const filedata={
+                file:file,
+                receiverid:document.getElementsByClassName('msgText')[0].id
+            }
+            console.log(filedata);
+            let urll= 'http://localhost:3000/uploadimage';
+            const response=await axios.post(urll,filedata,{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
+            console.log(response.data.message);
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 
