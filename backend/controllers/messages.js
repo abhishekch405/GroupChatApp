@@ -64,34 +64,34 @@ exports.getAllMessages=async (req,res,next)=>{
 
 
 
-const fs = require("fs");
-const util = require("util");
-const unlinkFile = util.promisify(fs.unlink);
+// const fs = require("fs");
+// const util = require("util");
+// const unlinkFile = util.promisify(fs.unlink);
 
-const upload = require('../services/s3Services');
-const singleUpload = upload.single("image");
+// const upload = require('../services/s3Services');
+// const singleUpload = upload.single("image");
 
-exports.uploadImage=async (req, res,next)=> {
+// exports.uploadImage=async (req, res,next)=> {
   
-  console.log("rfytguhijikisdjhyguhj",req.body);
-    //const uid = req.params.id;
-//     console.log("fileeeee",req.body.file);
-//   singleUpload(req, res, function (err) {
-//     if (err) {
-//       return res.json({
-//         success: false,
-//         errors: {
-//           title: "Image Upload Error",
-//           detail: err.message,
-//           error: err,
-//         },
-//       });
-//     }
-//     console.log(req.file.location);
-//     //let update = { profilePicture: req.file.location };
+//   console.log("rfytguhijikisdjhyguhj",req.body.file);
+//     //const uid = req.params.id;
+// //     console.log("fileeeee",req.body.file);
+// //   singleUpload(req, res, function (err) {
+// //     if (err) {
+// //       return res.json({
+// //         success: false,
+// //         errors: {
+// //           title: "Image Upload Error",
+// //           detail: err.message,
+// //           error: err,
+// //         },
+// //       });
+// //     }
+// //     console.log(req.file.location);
+// //     //let update = { profilePicture: req.file.location };
 
-//     // User.findByIdAndUpdate(uid, update, { new: true })
-//     //   .then((user) => res.status(200).json({ success: true, user: user }))
-//     //   .catch((err) => res.status(400).json({ success: false, error: err }));
-//   });
-}  
+// //     // User.findByIdAndUpdate(uid, update, { new: true })
+// //     //   .then((user) => res.status(200).json({ success: true, user: user }))
+// //     //   .catch((err) => res.status(400).json({ success: false, error: err }));
+// //   });
+// }  

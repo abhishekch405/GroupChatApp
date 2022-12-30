@@ -11,7 +11,7 @@ const loginRoutes=require('./routes/register');
 const memberRoutes=require('./routes/member');
 const messageRoutes=require('./routes/messages');
 const groupRoutes=require('./routes/groups');
-
+const uploadRoutes=require('./routes/upload');
 
 
 const sequelize=require('./util/database');
@@ -22,8 +22,9 @@ const Groups=require('./models/groups');
 const Groupmembers=require('./models/groupmembers');
 
 const app=express();
-const upload=multer();
-
+//const upload=multer();
+//app.use(multer());
+//app.use(multer());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(fileUpload());
@@ -35,7 +36,7 @@ app.use(loginRoutes);
 app.use(memberRoutes);
 app.use(groupRoutes);
 app.use(messageRoutes);
-
+app.use(uploadRoutes);
 
 // Many to one between users and messages
 Users.hasMany(Messages);

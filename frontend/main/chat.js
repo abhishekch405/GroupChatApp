@@ -104,15 +104,30 @@ function showAllgroups(groups){
                                 <div class="send__message">
                                 <form action="" method="post" id="send__message__form">
                                   <input type="text" id=${groupid} class="msgText" placeholder="Write Your Mesaage">
-                                  <input type="file" id=${groupid} class="msgFile">
                                   <button type="submit">➤</button>
                                 </form>
-                              </div>`
+                                </div>
+                                <div class="send__media">
+                                <form action="" method="post"  enctype="multipart/form-data" id="send__media__form">
+                                    <input type="file" id=${groupid} class="msgFile">
+                                    <button type="submit">Upload</button>
+                                </form>
+                                </div>`
         getgroupmessages(groupid);
         
         const messageform=document.getElementById('send__message__form');
         messageform.addEventListener('submit',sendMessage);
         
+        const inputfile = document.querySelector('.msgFile');
+        var fileToUpload;
+        inputfile.addEventListener("change", (e) => {
+            fileToUpload = e.target.files[0];
+        });
+        const mediaform=document.getElementById('send__media__form');
+            
+        mediaform.addEventListener('submit',sendMedia);
+    
+
         const display__chat=document.getElementById('display__chat');
         display__chat.addEventListener('click',showGroupInformation);
     })
@@ -121,7 +136,6 @@ function showAllgroups(groups){
 
 async function sendMessage(e){
     e.preventDefault();
-    const file=document.getElementsByClassName("msgFile")[0].files[0];
 
     const messagedata={
         message_text:document.getElementsByClassName('msgText')[0].value,
@@ -132,31 +146,29 @@ async function sendMessage(e){
     document.getElementsByClassName('msgText')[0].value='';
     console.log(messagedata);
     const url='http://localhost:3000/sendmessage';
-    try {
+        try {
         const response=await axios.post(url,messagedata,{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
         console.log(response.data.message);
         //shownotification(response.data.message);
-    } catch (error) {
+        } 
+        catch (error) {
         console.log(error);
-    }
-    }
-    else if(!file){
-        alert('It can not be empty')
-    }
-    else{
-        try {
-            const filedata={
-                file:file,
-                receiverid:document.getElementsByClassName('msgText')[0].id
-            }
-            console.log(filedata);
-            let urll= 'http://localhost:3000/uploadimage';
-            const response=await axios.post(urll,filedata,{headers:{"Authorization":`Bearer ${localStorage.getItem('token')}`}});
-            console.log(response.data.message);
-        } catch (error) {
-            console.log(error);
         }
     }
+    
+    else{
+       alert('Message Can not be empty');
+    }
+}
+
+
+
+
+
+async function sendMedia(e){
+    e.preventDefault();
+    //const fileToUpload = e.target.files[0];
+    console.log("media message!");
 }
 
 function showGroupInformation(e){
@@ -173,7 +185,7 @@ function showGroupInformation(e){
                                 <h4>Members of the Group</h4>
                             </div>
                             <div class="add_new_member">
-                                <form action="" method="POST" id="add_new_memberForm">
+                                <form action="" method="POST" enctype="multipart/form-data" id="add_new_memberForm">
                                     <input type="text" id=${groupid} class="add_member_mobile" placeholder="Enter valid Email id">
                                     <input type="submit"  value="Add Member">
                                 </form>
